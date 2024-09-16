@@ -22,11 +22,9 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    
+    private String nome;  
     @Column(unique = true)
     private String email;
-
     @Column(unique = true)
     private String cpf;
     private String telefone;

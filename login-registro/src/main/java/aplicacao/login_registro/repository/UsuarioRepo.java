@@ -9,7 +9,6 @@ import aplicacao.login_registro.model.Usuario;
 
 @Repository
 public interface UsuarioRepo extends JpaRepository<Usuario, Long>{
-
     Optional<Usuario> findByEmail(String email);
 
 }

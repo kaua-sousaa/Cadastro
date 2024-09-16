@@ -19,13 +19,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter{
-
     @Autowired
     TokenService tokenService;
-
     @Autowired
     UsuarioRepo usuarioRepo;
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -37,6 +34,8 @@ public class SecurityFilter extends OncePerRequestFilter{
             var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
             var authentication = new UsernamePasswordAuthenticationToken(usuario, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
+        }else {
+            System.out.println("Token expirado");
         }
         filterChain.doFilter(request, response);
     }
@@ -46,6 +45,6 @@ public class SecurityFilter extends OncePerRequestFilter{
         if(authHeader==null){
             return null;
         }
-        return authHeader.replace("Bearer", "");
+        return authHeader.replace("Bearer ", "");
     }
 }

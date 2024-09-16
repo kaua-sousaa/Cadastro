@@ -13,8 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Endereco {
-    
+public class Endereco {  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
