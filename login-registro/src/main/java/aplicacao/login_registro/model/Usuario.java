@@ -23,18 +23,24 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;  
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String cpf;
+    @Column(nullable = false)
     private String telefone;
+    @Column(nullable = false)
     private String senha;
+    @Column(nullable = false)
     private LocalDate dataNascimento;
+    @Column(nullable = false)
     private String sexo;
+    @Column(nullable = false)
     private String idioma;
+    @Column(nullable = false)
     private LocalDateTime dataCriacao;
 
-     @OneToOne
+    @OneToOne
     private Endereco endereco;
 
 }

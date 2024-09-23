@@ -3,7 +3,7 @@ package aplicacao.login_registro.services;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import aplicacao.login_registro.dto.LoginRequestDTO;
 import aplicacao.login_registro.dto.RegistrarRequestDTO;
 import aplicacao.login_registro.dto.ResponseDTO;
@@ -12,6 +12,7 @@ import aplicacao.login_registro.model.Endereco;
 import aplicacao.login_registro.model.Usuario;
 import aplicacao.login_registro.repository.EnderecoRepo;
 import aplicacao.login_registro.repository.UsuarioRepo;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -35,6 +36,7 @@ public class AuthService {
         return new ResponseDTO(usuario.getNome(), token);
     }
 
+    @Transactional
     public ResponseDTO criarUsuario(RegistrarRequestDTO registrarRequestDTO) {
         if (usuarioRepo.findByEmail(registrarRequestDTO.getEmail()).isPresent()) {
             throw new RuntimeException("Usuario duplicado");
@@ -51,8 +53,9 @@ public class AuthService {
         novoUsuario.setSenha(passwordEncoder.encode(registrarRequestDTO.getSenha()));
         novoUsuario.setDataNascimento(registrarRequestDTO.getDataNascimento());
         novoUsuario.setSexo(registrarRequestDTO.getSexo());
+        
         novoUsuario.setIdioma(registrarRequestDTO.getIdioma());
-        novoUsuario.setDataCriacao(registrarRequestDTO.getDataCriacao());
+        novoUsuario.setDataCriacao(LocalDateTime.now());
         novoUsuario.setEndereco(endereco);
         usuarioRepo.save(novoUsuario);
 
