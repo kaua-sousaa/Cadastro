@@ -9,7 +9,8 @@ services:
     networks:
       - login-network
   app:
-    image: spring-boot-login-registro:2.0
+    build:
+      context: .
     restart: always
     env_file:
       - .env
