@@ -30,10 +30,14 @@ Antes de executar a aplicação, verifique se você possui as seguintes ferramen
 
 
 ## Configuração e teste
+Exemplo feito no powershell
 1. Clone o repositório:
    ```bash
    git clone https://github.com/kaua-sousaa/Cadastro.git
    cd nome_do_projeto
+   New-Item .env -ItemType File (Criando arquivo .env)
+   notepad .env (editando .env, copie e cole as variáveis de ambiente das instruções abaixo e salve)
+   mvn clean package -DskipTests 
    docker-compose up --build
     ```
 ## Configuração do Ambiente
